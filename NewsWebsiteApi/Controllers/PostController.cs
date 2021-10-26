@@ -52,5 +52,25 @@ namespace NewsWebsiteApi.Controllers
             }
             return Ok(result);
         }
+
+        /// <summary>
+        /// lấy bài viết
+        /// </summary>
+        /// <param name="search">từ khóa tìm kiếm</param>
+        /// <returns>
+        ///  - HttpCode: 201 nếu cập nhật được dữ liệu
+        ///  - Lỗi dữ liệu không hợp lệ : 400 (BadRequest)
+        ///  - HttpCode: 500 nếu có lỗi hoặc Exceotion xảy ra trên Server
+        /// </returns>
+        [HttpGet("GetSearchPost")]
+        public IActionResult GetSearchPost(string search)
+        {
+            var result = _postServices.GetSearchPost(search);
+            if (result.CodeResult == CodeResult.NotValid)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }

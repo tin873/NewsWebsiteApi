@@ -17,5 +17,12 @@ namespace NewsWebsite.BusinessLogic.Services.Interface
         /// <param name="categoryId"></param>
         /// <returns>post thuộc category</returns>
         ServiceResult GetPostByCategoryId(int categoryId);
+
+        /// <summary>
+        /// lấy thông tin bài viết theo từ khóa tìm kiếm
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        ServiceResult GetSearchPost(string search);
     }
 }

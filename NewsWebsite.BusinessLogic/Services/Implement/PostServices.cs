@@ -22,7 +22,7 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
 
         #endregion
 
-        #region emplement
+        #region implement
         public ServiceResult Update(Post post)
         {
             var result = _postRepository.GetById(post.PostId);
@@ -67,6 +67,29 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
             {
                 _serviceResult.Data = null;
                 _serviceResult.Msg = "không tồn tại bài viết có danh mục này.";
+                _serviceResult.CodeResult = CodeResult.NotFound;
+                return _serviceResult;
+            }
+        }
+
+        public ServiceResult GetSearchPost(string search)
+        {
+            var result = _postRepository.GetSearchPost(search);
+            if(search == "" || search == null)
+            {
+                result = _postRepository.GetEntities();
+            }    
+            if (result.Count() > 0)
+            {
+                _serviceResult.Data = result;
+                _serviceResult.Msg = "lấy thông tin thành công.";
+                _serviceResult.CodeResult = CodeResult.Success;
+                return _serviceResult;
+            }
+            else
+            {
+                _serviceResult.Data = null;
+                _serviceResult.Msg = "không tìm thấy bài viết.";
                 _serviceResult.CodeResult = CodeResult.NotFound;
                 return _serviceResult;
             }

@@ -1,5 +1,6 @@
 ﻿using NewsWebsite.Core.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NewsWebsite.DataAccessLayer.Repository.Implement
 {
@@ -11,6 +12,11 @@ namespace NewsWebsite.DataAccessLayer.Repository.Implement
             _dbContext = dbContext;
         }
 
+        public IEnumerable<Post> GetSearchPost(string search)
+        {
+            var result = _dbContext.Posts.Where(p => p.Title.ToUpper().Contains(search.ToUpper()));
+            return result;
+        }
 
         public void Update(Post post)
         {
