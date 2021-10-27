@@ -11,5 +11,12 @@ namespace NewsWebsite.BusinessLogic.Services.Interface
         /// </summary>
         /// <param name="category">danh mục</param>
         ServiceResult Update(Category category);
+
+        /// <summary>
+        /// Thêm mới
+        /// </summary>
+        /// <param name="category">Thực thể</param>
+        /// <returns>số nguyên</returns>
+        ServiceResult Insert(Category category);
     }
 }

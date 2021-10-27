@@ -40,19 +40,19 @@ namespace NewsWebsiteApi.Controllers
         /// Lấy toàn bộ dữ liệu
         /// </summary>
         /// <returns>Nếu có dữ liệu: trả vễ HttpCode 200; 204 nếu không có dữ liệu</returns>
-        //[HttpGet]
-        //public IActionResult Get()
-        //{
-        //    var result = _baseServices.GetEntities();
-        //    if (result.Data != null)
-        //    {
-        //        return Ok(result);
-        //    }
-        //    else
-        //    {
-        //        return NoContent();
-        //    }
-        //}
+        [HttpGet("StoreGetAll")]
+        public IActionResult Get()
+        {
+            var result = _baseServices.GetEntities();
+            if (result.Data != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
         /// <summary>
         /// Lấy dữ liệu theo khóa chính
         /// </summary>
@@ -69,26 +69,6 @@ namespace NewsWebsiteApi.Controllers
             return Ok(result);
         }
 
-
-        /// <summary>
-        /// Thêm mới
-        /// </summary>
-        /// <param name="entity">Thực thể muốn thêm mới</param>
-        /// <returns>
-        ///  - HttpCode: 200 nếu thêm được dữ liệu
-        ///  - Lỗi dữ liệu không hợp lệ : 400 (BadRequest)
-        ///  - HttpCode: 500 nếu có lỗi hoặc Exceotion xảy ra trên Server
-        /// </returns>
-        [HttpPost]
-        public IActionResult Post([FromBody] TEntity entity)
-        {
-            var result = _baseServices.Insert(entity);
-            if (result.CodeResult == CodeResult.NotValid)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
-        }
 
 
         /// <summary>

@@ -23,12 +23,6 @@ namespace NewsWebsite.BusinessLogic.BaseServices
         /// <returns>Thực thể có id tương ứng</returns>
         ServiceResult GetById(int entityId);
 
-        /// <summary>
-        /// Thêm mới
-        /// </summary>
-        /// <param name="entity">Thực thể</param>
-        /// <returns>số nguyên</returns>
-        ServiceResult Insert(TEntity entity);
 
 
         /// <summary>

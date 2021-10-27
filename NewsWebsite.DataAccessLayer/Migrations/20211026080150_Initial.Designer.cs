@@ -10,7 +10,7 @@ using NewsWebsite.DataAccessLayer;
 namespace NewsWebsite.DataAccessLayer.Migrations
 {
     [DbContext(typeof(NewsWebsiteDbContext))]
-    [Migration("20211018154247_Initial")]
+    [Migration("20211026080150_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

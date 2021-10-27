@@ -26,8 +26,8 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
             var result = _categoryRepository.GetById(category.CategoryId);
             if (result != null)
             {
-                _categoryRepository.Update(category);
-                if (_unitOfWork.Commit() > 0)
+                var resultUpdate = _categoryRepository.Update(category);
+                if (resultUpdate > 0)
                 {
                     _serviceResult.Data = 1;
                     _serviceResult.Msg = "Sửa bản ghi thành công.";
@@ -46,6 +46,27 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
             {
                 _serviceResult.Data = 0;
                 _serviceResult.Msg = "Dữ liệu không tồn tại.";
+                _serviceResult.CodeResult = CodeResult.NotValid;
+                return _serviceResult;
+            }
+        }
+
+        public ServiceResult Insert(Category category)
+        {
+            var result = _categoryRepository.Insert(category);
+            if (result > 0)
+            {
+
+                _serviceResult.Data = result;
+                _serviceResult.Msg = "Thêm mới thành công.";
+                _serviceResult.CodeResult = CodeResult.Success;
+                return _serviceResult;
+
+            }
+            else
+            {
+                _serviceResult.Data = null;
+                _serviceResult.Msg = "Lỗi không thể thêm mới.";
                 _serviceResult.CodeResult = CodeResult.NotValid;
                 return _serviceResult;
             }

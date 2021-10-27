@@ -2,6 +2,7 @@
 using NewsWebsite.DataAccessLayer.Entities;
 using NewsWebsite.DataAccessLayer.Infrastructure;
 using NewsWebsite.DataAccessLayer.Repository;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsWebsite.BusinessLogic.BaseServices
@@ -27,8 +28,7 @@ namespace NewsWebsite.BusinessLogic.BaseServices
             var entity = _baseReposistory.GetById(entityId);
             if (entity != null)
             {
-                _baseReposistory.Delete(entity);
-                var result = _unitOfWork.Commit();
+                var result = _baseReposistory.Delete(entityId);
                 if (result > 0)
                 {
                     _serviceResult.Data = result;
@@ -73,7 +73,7 @@ namespace NewsWebsite.BusinessLogic.BaseServices
 
         public ServiceResult GetEntities()
         {
-            var result = _baseReposistory.GetEntities();
+            var result = _baseReposistory.GetEntities().ToList();
             if (result != null)
             {
                 _serviceResult.Data = result;
@@ -111,34 +111,6 @@ namespace NewsWebsite.BusinessLogic.BaseServices
             }
         }
 
-        public ServiceResult Insert(TEntity entity)
-        {
-            var result = _baseReposistory.Insert(entity);
-            if (result.Entity != null)
-            {
-                if(_unitOfWork.Commit() > 0)
-                {
-                    _serviceResult.Data = result.Entity;
-                    _serviceResult.Msg = "Thêm mới thành công.";
-                    _serviceResult.CodeResult = CodeResult.Success;
-                    return _serviceResult;
-                }
-                else
-                {
-                    _serviceResult.Data = null;
-                    _serviceResult.Msg = "Lỗi không thể thêm mới.";
-                    _serviceResult.CodeResult = CodeResult.NotValid;
-                    return _serviceResult;
-                }
-            }
-            else
-            {
-                _serviceResult.Data = null;
-                _serviceResult.Msg = "Lỗi không thể thêm mới.";
-                _serviceResult.CodeResult = CodeResult.Exeption;
-                return _serviceResult;
-            }
-        }
 
         #endregion
     }

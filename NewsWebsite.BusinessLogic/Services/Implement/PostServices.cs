@@ -28,8 +28,8 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
             var result = _postRepository.GetById(post.PostId);
             if (result != null)
             {
-                _postRepository.Update(post);
-                if (_unitOfWork.Commit() > 0)
+                var resultUpdate = _postRepository.Update(post);
+                if (resultUpdate > 0)
                 {
                     _serviceResult.Data = 1;
                     _serviceResult.Msg = "Sửa bản ghi thành công.";
@@ -54,8 +54,7 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
         }
         public ServiceResult GetPostByCategoryId(int categoryId)
         {
-            var posts = _postRepository.GetEntities().ToList();
-            var result = posts.Where(x => x.CategoryId == categoryId).ToList();
+            var result = _postRepository.GetPostByCategory(categoryId);
             if(result != null)
             {
                 _serviceResult.Data = result;
@@ -91,6 +90,26 @@ namespace NewsWebsite.BusinessLogic.Services.Implement
                 _serviceResult.Data = null;
                 _serviceResult.Msg = "không tìm thấy bài viết.";
                 _serviceResult.CodeResult = CodeResult.NotFound;
+                return _serviceResult;
+            }
+        }
+
+        public ServiceResult Insert(Post post)
+        {
+            _postRepository.Insert(post);
+
+            if (_unitOfWork.Commit() > 0)
+            {
+                _serviceResult.Data = 1;
+                _serviceResult.Msg = "Thêm mới thành công.";
+                _serviceResult.CodeResult = CodeResult.Success;
+                return _serviceResult;
+            }
+            else
+            {
+                _serviceResult.Data = null;
+                _serviceResult.Msg = "Lỗi không thể thêm mới.";
+                _serviceResult.CodeResult = CodeResult.NotValid;
                 return _serviceResult;
             }
         }

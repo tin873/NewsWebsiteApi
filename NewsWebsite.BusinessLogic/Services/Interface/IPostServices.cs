@@ -24,5 +24,12 @@ namespace NewsWebsite.BusinessLogic.Services.Interface
         /// <param name="search"></param>
         /// <returns></returns>
         ServiceResult GetSearchPost(string search);
+
+        /// <summary>
+        /// Thêm mới
+        /// </summary>
+        /// <param name="post">Thực thể</param>
+        /// <returns>số nguyên</returns>
+        ServiceResult Insert(Post post);
     }
 }

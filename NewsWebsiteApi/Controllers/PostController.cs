@@ -72,5 +72,26 @@ namespace NewsWebsiteApi.Controllers
             }
             return Ok(result);
         }
+
+
+        /// <summary>
+        /// Thêm mới
+        /// </summary>
+        /// <param name="entity">Thực thể muốn thêm mới</param>
+        /// <returns>
+        ///  - HttpCode: 200 nếu thêm được dữ liệu
+        ///  - Lỗi dữ liệu không hợp lệ : 400 (BadRequest)
+        ///  - HttpCode: 500 nếu có lỗi hoặc Exceotion xảy ra trên Server
+        /// </returns>
+        [HttpPost]
+        public IActionResult Post([FromBody] Post post)
+        {
+            var result = _postServices.Insert(post);
+            if (result.CodeResult == CodeResult.NotValid)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }

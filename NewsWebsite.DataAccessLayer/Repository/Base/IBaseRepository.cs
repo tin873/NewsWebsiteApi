@@ -23,12 +23,6 @@ namespace NewsWebsite.DataAccessLayer.Repository
         /// <returns>Thực thể có id tương ứng</returns>
         TEntity GetById(int entityId);
 
-        /// <summary>
-        /// Thêm mới
-        /// </summary>
-        /// <param name="entity">Thực thể</param>
-        /// <returns> bản ghi thêm mới trong db</returns>
-        Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Insert(TEntity entity);
 
 
         /// <summary>
@@ -36,7 +30,7 @@ namespace NewsWebsite.DataAccessLayer.Repository
         /// </summary>
         /// <param name="TEntity">thực thể</param>
         /// <returns>int</returns>
-        Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<TEntity> Delete(TEntity entity);
+        int Delete(int entityId);
 
         /// <summary>
         /// tổng số bản ghi
